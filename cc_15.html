@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Management Dashboard</title>
+    <style> 
+        /* page background & layout */
+        body { font-family: Arial, sans-serif; }
+
+        /* risk dashboard container */
+        #riskDashboard { margin-top: 20px; }
+
+        /* Styling for the risk cards */
+        .riskCard { 
+            padding: 10px; 
+            margin: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+        }
+
+        /* Color coding the risks by urgency */
+        .low { background-color: rgb(112, 237, 112); } /* Low risk - Green */
+        .medium { background-color: rgb(247, 247, 42); } /* Medium risk - Yellow */
+        .high { background-color: rgb(248, 97, 97); } /* High risk - Red */
+
+        /* Button styling */
+        button { 
+            margin-top: 5px; 
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Risk Management Dashboard</h1>
+
+    <!-- Form to add new risk items -->
+    <form id="riskForm">
+        <input type="text" id="riskName" placeholder="Risk Name" required>
+        <select id="riskLevel">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <input type="text" id="department" placeholder="Department" required>
+        <button type="submit">Add Risk</button>
+    </form>
+
+    <!-- Button to increase all risk levels -->
+    <button id="increaseRiskLevels">Increase Risk Levels</button>
+
+    <!-- Risk dashboard container -->
+    <div id="riskDashboard"></div>
+
+    <script src="cc_15.js"></script>
+</body>
+</html>
