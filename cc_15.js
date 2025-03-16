@@ -6,7 +6,19 @@ const riskDashboard = document.getElementById("riskDashboard"); // selects the  
 // Task 2 & 3 - Adding and Removing Risk Items Dynamically
 function addRiskItem(riskName, riskLevel, department) {
     const riskCard = document.createElement("div"); // Creates a risk card
-    riskCard.classList.add("riskCard", riskLevel.toLowerCase()); // Assigns class for styling based on the level
+    riskCard.classList.add("riskCard") // assigned based on the class for styling 
+    // Task 4: Catergorizing by risk level 
+    function addRiskItem(riskName, riskLevel, department) {
+        const riskCard = document.createElement("div"); //creates a risk card
+        riskCard.classList.add("riskCard"); //assigns base class for styling
+    // Color coding based on  risk level
+    if (riskLevel.toLowerCase() === "low") {
+        riskCard.classList.add("low");    // /*  Green- low risk  */
+    } else if (riskLevel.toLowerCase() === "medium") {
+        riskCard.classList.add("medium");    /* Yellow Medium risk */
+    } else if (riskLevel.toLowerCase() === "high") {
+        riskCard.classList.add("high");    /*  Red-  High risk */
+    }
 
     // Risk details:
     const nameHeading = document.createElement("h3");
@@ -22,6 +34,7 @@ function addRiskItem(riskName, riskLevel, department) {
     const resolveButton = document.createElement("button");
     resolveButton.textContent = "Resolve";
     resolveButton.addEventListener("click", function () {
+        console.log(`Resolved: ${riskName} (${riskLevel}) from ${department}`); // logs when the card has been resolved in the console
         riskDashboard.removeChild(riskCard); //  Removes the risk item when resolved
     });
 
@@ -55,3 +68,10 @@ addRiskItem("Supply Chain Disruption", "Medium", "Operations"); // Output should
 // ** Test Case: task 3* 
 addRiskItem("Market Fluctuations", "High", "Finance"); // Clicking the Resolve button  should remove the  risk from the dashboard.
 
+
+
+
+
+//**Test cases; task 4* 
+addRiskItem("Cybersecurity Threat", "High", "IT");
+addRiskItem("HR Compliance Issue", "Low", "Human Resources"); // green  
