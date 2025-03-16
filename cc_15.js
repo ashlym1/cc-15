@@ -49,7 +49,9 @@ form.addEventListener("submit", function (event) {
     form.reset();
 });  // to prevent any error/confusion on the console
 
-// ** Test Cases :task 2 **
+// ** Test Cases :task 2 *
 addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations"); // Output should be : Two risk cards should appear on the dashboard.
+// ** Test Case: task 3* 
+addRiskItem("Market Fluctuations", "High", "Finance"); // Clicking the Resolve button  should remove the  risk from the dashboard.
 
