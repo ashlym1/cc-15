@@ -11,7 +11,15 @@ function addRiskItem(riskName, riskLevel, department) {
     function addRiskItem(riskName, riskLevel, department) {
         const riskCard = document.createElement("div"); //creates a risk card
         riskCard.classList.add("riskCard"); //assigns base class for styling
-    // Color coding based on  risk level
+
+  // Task 5; Prvents clicks insde the risk card from affecting the dashborad : 
+  riskCard.addEventListener("click", function(event) {
+    event.stopPropagation(); // No event bubbling
+    console.log(`${riskName}'s risk card clicked.`);
+});
+    // Color coding based on  risk level(event) {
+    // task 6: 
+    event,stopPropaganda () ; //handaling event propaganda
     if (riskLevel.toLowerCase() === "low") {
         riskCard.classList.add("low");    // /*  Green- low risk  */
     } else if (riskLevel.toLowerCase() === "medium") {
@@ -72,6 +80,9 @@ addRiskItem("Market Fluctuations", "High", "Finance"); // Clicking the Resolve b
 
 
 
-//**Test cases; task 4* 
+//**Test cases; task 4
 addRiskItem("Cybersecurity Threat", "High", "IT");
 addRiskItem("HR Compliance Issue", "Low", "Human Resources"); // green  
+//**Test cases; task 5  */
+addRiskItem("Employee Retention", "Low", "HR"); // Clicking "Increase Risk Levels" should change it to "Medium".
+// Test Case: task 6: / / Click inside a risk card should not trigger a dashboard-wide event.
