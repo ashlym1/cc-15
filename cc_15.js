@@ -1,31 +1,26 @@
 // Task 1 - Base Structure
 console.log("Risk Dashboard Loaded"); // * seeing if the code is running :) 
-const form = document.getElementById("riskForm"); // Selects the  form
-const riskDashboard = document.getElementById("riskDashboard"); // selects the  risk container
+const form = document.getElementById("riskForm"); // Selects the form
+const riskDashboard = document.getElementById("riskDashboard"); // Selects the risk container
 
-// Task 2 & 3 - Adding and Removing Risk Items Dynamically
+// Task 2, 3,  - Adding and Removing Risk Items Dynamically
 function addRiskItem(riskName, riskLevel, department) {
     const riskCard = document.createElement("div"); // Creates a risk card
-    riskCard.classList.add("riskCard") // assigned based on the class for styling 
-    // Task 4: Catergorizing by risk level 
-    function addRiskItem(riskName, riskLevel, department) {
-        const riskCard = document.createElement("div"); //creates a risk card
-        riskCard.classList.add("riskCard"); //assigns base class for styling
+    riskCard.classList.add("riskCard"); // Assigns base class for styling
 
-  // Task 5; Prvents clicks insde the risk card from affecting the dashborad : 
-  riskCard.addEventListener("click", function(event) {
-    event.stopPropagation(); // No event bubbling
-    console.log(`${riskName}'s risk card clicked.`);
-});
-    // Color coding based on  risk level(event) {
-    // task 6: 
-    event,stopPropaganda () ; //handaling event propaganda
+    // Task 6: Prevent clicks inside the risk card from affecting the dashboard
+    riskCard.addEventListener("click", function (event) {
+        event.stopPropagation(); // Prevents event bubbling
+        console.log(`${riskName}'s risk card clicked.`);
+    });
+
+    // Task 4: Categorizing by risk level
     if (riskLevel.toLowerCase() === "low") {
-        riskCard.classList.add("low");    // /*  Green- low risk  */
+        riskCard.classList.add("low"); // Green is low risk
     } else if (riskLevel.toLowerCase() === "medium") {
-        riskCard.classList.add("medium");    /* Yellow Medium risk */
+        riskCard.classList.add("medium"); // Yellow is medium risk
     } else if (riskLevel.toLowerCase() === "high") {
-        riskCard.classList.add("high");    /*  Red-  High risk */
+        riskCard.classList.add("high"); // Red is high risk
     }
 
     // Risk details:
@@ -38,12 +33,13 @@ function addRiskItem(riskName, riskLevel, department) {
     const departmentPara = document.createElement("p");
     departmentPara.textContent = `Department: ${department}`;
 
-    // Resolve Button - The risk card  goes away when clicked
+    // Resolve Button - The risk card goes away when clicked
     const resolveButton = document.createElement("button");
     resolveButton.textContent = "Resolve";
-    resolveButton.addEventListener("click", function () {
-        console.log(`Resolved: ${riskName} (${riskLevel}) from ${department}`); // logs when the card has been resolved in the console
-        riskDashboard.removeChild(riskCard); //  Removes the risk item when resolved
+    resolveButton.addEventListener("click", function (event) {
+        event.stopPropagation(); //  Prevents bubbling on the  dashboard
+        console.log(`Resolved: ${riskName} (${riskLevel}) from ${department}`); // Logs when resolved button is clicked 
+        riskDashboard.removeChild(riskCard); // Removes the risk item when resolved
     });
 
     // Appends the elements to the risk card
@@ -52,7 +48,7 @@ function addRiskItem(riskName, riskLevel, department) {
     riskCard.appendChild(departmentPara);
     riskCard.appendChild(resolveButton);
 
-    // Appends the  risk card to the  dashboard
+    // Appends the risk card to the dashboard
     riskDashboard.appendChild(riskCard);
 }
 
@@ -70,19 +66,16 @@ form.addEventListener("submit", function (event) {
     form.reset();
 });  // to prevent any error/confusion on the console
 
-// ** Test Cases :task 2 *
+// Test Cases : 
+  // Task 2: Output should be 2 risk cards  on the dashboard.
 addRiskItem("Data Breach", "High", "IT");
-addRiskItem("Supply Chain Disruption", "Medium", "Operations"); // Output should be : Two risk cards should appear on the dashboard.
-// ** Test Case: task 3* 
-addRiskItem("Market Fluctuations", "High", "Finance"); // Clicking the Resolve button  should remove the  risk from the dashboard.
-
-
-
-
-
-//**Test cases; task 4
-addRiskItem("Cybersecurity Threat", "High", "IT");
-addRiskItem("HR Compliance Issue", "Low", "Human Resources"); // green  
-//**Test cases; task 5  */
-addRiskItem("Employee Retention", "Low", "HR"); // Clicking "Increase Risk Levels" should change it to "Medium".
-// Test Case: task 6: / / Click inside a risk card should not trigger a dashboard-wide event.
+addRiskItem("Supply Chain Disruption", "Medium", "Operations"); 
+  // Task 3: Clicking "Resolve" on a risk card and it removes  it from the dashboard.
+  addRiskItem("Market Fluctuations", "High", "Finance"); // Clicking "Resolve" should remove this risk from the dashboard.
+  // task 4: 
+  addRiskItem("Cybersecurity Threat", "High", "IT");
+addRiskItem("HR Compliance Issue", "Low", "Human Resources");
+  // task 5: 
+  addRiskItem("Employee Retention", "Low", "HR");
+// Clicking "Increase Risk Levels" should change it to "Medium".
+ /// task : 6 ;  Click inside a risk card should not trigger a dashboard-wide event.

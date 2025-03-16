@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
+    <body bgcolor="#F5F5F5"></body>
+
+    </body>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Risk Management Dashboard</title>
     <style> 
+  
         /* page background & layout */
         body { font-family: Arial, sans-serif; }
+        
 
         /* risk dashboard container */
         #riskDashboard { margin-top: 20px; }
@@ -15,14 +20,14 @@
         .riskCard { 
             padding: 10px; 
             margin: 10px; 
-            border: 1px solid #ccc; 
+            border: 1px solid #030303; 
             border-radius: 5px; 
         }
 
-        /* Color coding the risks by urgency */
-        .low { background-color: rgb(112, 237, 112); } /* Low risk - Green */
-        .medium { background-color: rgb(247, 247, 42); } /* Medium risk - Yellow */
-        .high { background-color: rgb(248, 97, 97); } /* High risk - Red */
+ /* Color coding the risks by urgency( tired on the js file but the colors would not show up ) */
+ .low { background-color: rgb(2, 110, 2); } /* Low risk - Green */
+        .medium { background-color: rgb(240, 240, 1); } /* Medium risk - Yellow */
+        .high { background-color: rgb(154, 11, 11); } /* High risk - Red */
 
         /* Button styling */
         button { 
@@ -32,7 +37,10 @@
     </style>
 </head>
 <body>
-    <h1>Risk Management Dashboard</h1>
+    <header>
+        <h1>Risk Management Dashboard</h1>
+    </header>
+
 
     <!-- Form to add new risk items -->
     <form id="riskForm">
@@ -45,7 +53,7 @@
         <input type="text" id="department" placeholder="Department" required>
         <button type="submit">Add Risk</button>
     </form>
-
+   
     <!-- Button to increase all risk levels -->
     <button id="increaseRiskLevels">Increase Risk Levels</button>
 
@@ -53,5 +61,12 @@
     <div id="riskDashboard"></div>
 
     <script src="cc_15.js"></script>
+
+
+<!-- Put in a footer like in challenge.14-->
+    <footer>
+        <p>&copy; 2025 Miffy's Risk Management  Dashboard</p> 
+    </footer>
+
 </body>
 </html>
