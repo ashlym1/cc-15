@@ -1,5 +1,4 @@
 // Task 1 - Base Structure
-console.log("Risk Dashboard Loaded"); // * seeing if the code is running :) 
 const form = document.getElementById("riskForm"); // Selects the form
 const riskDashboard = document.getElementById("riskDashboard"); // Selects the risk container
 
@@ -10,7 +9,7 @@ function addRiskItem(riskName, riskLevel, department) {
 
     // Task 6: Prevent clicks inside the risk card from affecting the dashboard
     riskCard.addEventListener("click", function (event) {
-        event.stopPropagation(); // Prevents event bubbling
+        event.stopPropagation(); // Prevents the event bubbling
         console.log(`${riskName}'s risk card clicked.`);
     });
 
@@ -22,7 +21,34 @@ function addRiskItem(riskName, riskLevel, department) {
     } else if (riskLevel.toLowerCase() === "high") {
         riskCard.classList.add("high"); // Red is high risk
     }
+    // Task 5: Implementing Bulk Updates (like cc14 T5 : Inline editing  of  tickets)
+const increaseRiskLevelsButton = document.getElementById("increaseRiskLevels");
 
+increaseRiskLevelsButton.addEventListener("click", function () {
+    console.log("Increase Risk Levels button clicked."); 
+
+    let riskCards = document.getElementsByClassName("riskCard"); // gets  all risk cards
+
+      // Applied in line updates like in challenge 14  
+    Array.from(riskCards).forEach(riskCard => {
+        let levelPara = riskCard.querySelector("p"); // Selected the  first paragraph in the risk card
+
+        // Extract current risk level
+        let currentLevel = levelPara.textContent.replace("Level: ", "").toLowerCase();
+
+        // Determin a  new risk level
+        let newLevel = currentLevel === "low" ? "Medium" :
+                       currentLevel === "medium" ? "High" :
+                       "High"; // High risk stays the same
+
+        // Update text content with new level
+        levelPara.textContent = `Level: ${newLevel}`;
+
+        // Remove previous  risk level classes and apply the new one
+        riskCard.classList.remove("low", "medium", "high"); 
+        riskCard.classList.add(newLevel.toLowerCase());
+    });
+});
     // Risk details:
     const nameHeading = document.createElement("h3");
     nameHeading.textContent = riskName;
