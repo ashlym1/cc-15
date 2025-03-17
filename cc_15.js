@@ -21,7 +21,7 @@ function addRiskItem(riskName, riskLevel, department) {
     } else if (riskLevel.toLowerCase() === "high") {
         riskCard.classList.add("high"); // Red is high risk
     }
-    // Task 5: Implementing Bulk Updates (like cc14 T5 : Inline editing  of  tickets)
+    // Task 5: Implementing Bulk Updates (like challenge 14 T5) 
 const increaseRiskLevelsButton = document.getElementById("increaseRiskLevels");
 
 increaseRiskLevelsButton.addEventListener("click", function () {
@@ -29,14 +29,14 @@ increaseRiskLevelsButton.addEventListener("click", function () {
 
     let riskCards = document.getElementsByClassName("riskCard"); // gets  all risk cards
 
-      // Applied in line updates like in challenge 14  
+      // line updates like in challenge 14  
     Array.from(riskCards).forEach(riskCard => {
         let levelPara = riskCard.querySelector("p"); // Selected the  first paragraph in the risk card
 
         // Extract current risk level
         let currentLevel = levelPara.textContent.replace("Level: ", "").toLowerCase();
     
-        // Determin a new risk level : 
+        // Determined  new risk level : 
         if (currentLevel === "low") {   // low risk goes to medium 
             newLevel = "Medium";
         } else if (currentLevel === "medium") { // medium risk goes to high 
