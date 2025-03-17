@@ -35,11 +35,13 @@ increaseRiskLevelsButton.addEventListener("click", function () {
 
         // Extract current risk level
         let currentLevel = levelPara.textContent.replace("Level: ", "").toLowerCase();
-
-        // Determin a  new risk level
-        let newLevel = currentLevel === "low" ? "Medium" :
-                       currentLevel === "medium" ? "High" :
-                       "High"; // High risk stays the same
+    
+        // Determin a new risk level : 
+        if (currentLevel === "low") {   // low risk goes to medium 
+            newLevel = "Medium";
+        } else if (currentLevel === "medium") { // medium risk goes to high 
+           newLevel= "High" ;
+          }                             // High risk stays the same
 
         // Update text content with new level
         levelPara.textContent = `Level: ${newLevel}`;
