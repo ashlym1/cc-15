@@ -1,8 +1,9 @@
 // Task 1 - Base Structure
 const form = document.getElementById("riskForm"); // Selects the form
 const riskDashboard = document.getElementById("riskDashboard"); // Selects the risk container
+const increaseRiskLevelsButton = document.getElementById("increaseRiskLevels"); // keeping it at the top; function should run  without being blocked.
 
-// Task 2, 3,  - Adding and Removing Risk Items Dynamically
+// Task 2, 3 - Adding and Removing Risk Items Dynamically
 function addRiskItem(riskName, riskLevel, department) {
     const riskCard = document.createElement("div"); // Creates a risk card
     riskCard.classList.add("riskCard"); // Assigns base class for styling
@@ -15,42 +16,13 @@ function addRiskItem(riskName, riskLevel, department) {
 
     // Task 4: Categorizing by risk level
     if (riskLevel.toLowerCase() === "low") {
-        riskCard.classList.add("low"); // Green is low risk
+        riskCard.classList.add("low"); // Green =low risk
     } else if (riskLevel.toLowerCase() === "medium") {
-        riskCard.classList.add("medium"); // Yellow is medium risk
+        riskCard.classList.add("medium"); // Yellow = medium risk
     } else if (riskLevel.toLowerCase() === "high") {
-        riskCard.classList.add("high"); // Red is high risk
+        riskCard.classList.add("high"); // Red =high risk
     }
-    // Task 5: Implementing Bulk Updates (like challenge 14 T5) 
-const increaseRiskLevelsButton = document.getElementById("increaseRiskLevels");
 
-increaseRiskLevelsButton.addEventListener("click", function () {
-    console.log("Increase Risk Levels button clicked."); 
-
-    let riskCards = document.getElementsByClassName("riskCard"); // gets  all risk cards
-
-      // line updates like in challenge 14  
-    Array.from(riskCards).forEach(riskCard => {
-        let levelPara = riskCard.querySelector("p"); // Selected the  first paragraph in the risk card
-
-        // Extract current risk level
-        let currentLevel = levelPara.textContent.replace("Level: ", "").toLowerCase();
-    
-        // Determined  new risk level : 
-        if (currentLevel === "low") {   // low risk goes to medium 
-            newLevel = "Medium";
-        } else if (currentLevel === "medium") { // medium risk goes to high 
-           newLevel= "High" ;
-          }                             // High risk stays the same
-
-        // Update text content with new level
-        levelPara.textContent = `Level: ${newLevel}`;
-
-        // Remove previous  risk level classes and apply the new one
-        riskCard.classList.remove("low", "medium", "high"); 
-        riskCard.classList.add(newLevel.toLowerCase());
-    });
-});
     // Risk details:
     const nameHeading = document.createElement("h3");
     nameHeading.textContent = riskName;
@@ -65,7 +37,7 @@ increaseRiskLevelsButton.addEventListener("click", function () {
     const resolveButton = document.createElement("button");
     resolveButton.textContent = "Resolve";
     resolveButton.addEventListener("click", function (event) {
-        event.stopPropagation(); //  Prevents bubbling on the  dashboard
+        event.stopPropagation(); // Prevents bubbling on the dashboard
         console.log(`Resolved: ${riskName} (${riskLevel}) from ${department}`); // Logs when resolved button is clicked 
         riskDashboard.removeChild(riskCard); // Removes the risk item when resolved
     });
@@ -79,6 +51,38 @@ increaseRiskLevelsButton.addEventListener("click", function () {
     // Appends the risk card to the dashboard
     riskDashboard.appendChild(riskCard);
 }
+
+// 
+increaseRiskLevelsButton.addEventListener("click", function () {
+    console.log("Increase Risk Levels button clicked."); 
+
+    let riskCards = document.getElementsByClassName("riskCard"); // Get all risk cards
+
+    Array.from(riskCards).forEach(riskCard => {
+        let levelPara = Array.from(riskCard.querySelectorAll("p"))  
+            .find(p => p.textContent.startsWith("Level: ")); // Ensure correct "Level" paragraph
+
+        if (!levelPara) return; // If no level paragraph found, return
+
+        // Extract current risk level
+        let currentLevel = levelPara.textContent.replace("Level: ", "").trim().toLowerCase();
+        let newLevel = currentLevel; // Default to the same level
+
+        // logic for risk level change
+        if (currentLevel === "low") {   
+            newLevel = "Medium"; // Low goes to Medium
+        } else if (currentLevel === "medium") { 
+            newLevel = "High"; // Medium  goes to High
+        } // High risk  stays High
+
+        // Update text content with new level
+        levelPara.textContent = `Level: ${newLevel}`;
+
+        // Remove previous risk level classes and apply the new one
+        riskCard.classList.remove("low", "medium", "high"); 
+        riskCard.classList.add(newLevel.toLowerCase());
+    });
+});
 
 // Allows user to enter a new risk  
 form.addEventListener("submit", function (event) {
@@ -94,16 +98,15 @@ form.addEventListener("submit", function (event) {
     form.reset();
 });  // to prevent any error/confusion on the console
 
-// Test Cases : 
-  // Task 2: Output should be 2 risk cards  on the dashboard.
+// **Test Cases**
+  // task 2: 
 addRiskItem("Data Breach", "High", "IT");
 addRiskItem("Supply Chain Disruption", "Medium", "Operations"); 
-  // Task 3: Clicking "Resolve" on a risk card and it removes  it from the dashboard.
-  addRiskItem("Market Fluctuations", "High", "Finance"); // Clicking "Resolve" should remove this risk from the dashboard.
-  // task 4: 
-  addRiskItem("Cybersecurity Threat", "High", "IT");
+ // task 3: 
+addRiskItem("Market Fluctuations", "High", "Finance"); 
+// task 4: 
+addRiskItem("Cybersecurity Threat", "High", "IT");
 addRiskItem("HR Compliance Issue", "Low", "Human Resources");
-  // task 5: 
-  addRiskItem("Employee Retention", "Low", "HR");
-// Clicking "Increase Risk Levels" should change it to "Medium".
- /// task : 6 ;  Click inside a risk card should not trigger a dashboard-wide event.
+// task 5: 
+addRiskItem("Employee Retention", "Low", "HR");
+// task 6: when clicking inside a risk card it should not trigger a dashboard-wide event.
